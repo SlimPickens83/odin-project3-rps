@@ -1,6 +1,28 @@
 //  0) Declare variables such as 'cpuAns', 'userAns', and any others as needed.
 
+let cpuAns;
+let userAns;
+let cpuWins;
+let userWins;
+let cpuRounds;
+let userRounds;
+
 //  1) CPU generates 'Rock', 'Paper', or 'Scissors' at random
+
+function computerPlay() {
+    let x = Math.random()*100;
+    if (x <= 32) {
+        return cpuAns = "Rock";
+    } else if (x <= 66) { 
+        return cpuAns = "Paper";
+    } else {
+        return cpuAns = "Scissors";
+    }
+}
+
+computerPlay();
+
+console.log(cpuAns);
 
 //  2) Prompt user to enter 'Rock', 'Paper, or 'Scissors'. Make this field case insensitive.
 
