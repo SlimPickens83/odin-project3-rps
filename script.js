@@ -20,3 +20,14 @@
 //  4) Tally results
 
 //  5) Compare results
+
+//      if cpuWins > userWins, return 'CPU Wins'
+//      else, return 'User Wins'
+//      increment roundCount + 1
+
+//  6) Start next round unless roundCount = 5
+//      else tally total roundWins for both CPU & User
+
+//  7) Compare total roundWins and declare winner
+
+//  8) Would you like to play again?
