@@ -2,10 +2,16 @@
 
 let cpuAns;
 let userAns;
-let cpuWins;
-let userWins;
-let cpuRounds;
-let userRounds;
+let cpuWins = 0;
+let userWins = 0;
+let cpuRounds = 0;
+let userRounds = 0;
+let drawRounds = 0;
+let roundNumber = 1;
+
+//  Repeat process through end of Round 5
+
+while(roundNumber <= 5) {
 
 //  1) CPU generates 'Rock', 'Paper', or 'Scissors' at random
 
@@ -15,18 +21,39 @@ function computerPlay() {
         return cpuAns = "Rock";
     } else if (x <= 66) { 
         return cpuAns = "Paper";
-    } else {
+    } else if (x <= 99) {
         return cpuAns = "Scissors";
     }
 }
 
 computerPlay();
 
-console.log(cpuAns);
+
 
 //  2) Prompt user to enter 'Rock', 'Paper, or 'Scissors'. Make this field case insensitive.
 
+userAns = prompt("Rock, Paper, or Scissors?");
+console.log("User guessed '" + userAns + "'");
+console.log("CPU guessed '" + cpuAns + "'")
+
 //  3) Compare cpuAns and userAns.
+
+if (userAns == null) {
+    prompt("Refresh and try again!");
+} else if (userAns === cpuAns) {
+    console.log("Draw!");
+} else if (userAns === "Rock" || cpuAns === "Scissors") { // || userAns === "Paper" && cpuAns === "Rock" || userAns === "Scissors" && cpuAns === "Paper") {
+    console.log("User Wins!");
+} else {
+    console.log("CPU Wins!");
+}
+
+console.log(userAns);
+console.log(cpuAns);
+
+roundNumber++;
+
+}
 
 //      if cpuAns = userAns, return 'Draw'
 
@@ -40,6 +67,14 @@ console.log(cpuAns);
 //      else if userAns = 'Paper', return 'CPU Wins'
 
 //  4) Tally results
+
+if(cpuWins == userWins) {
+    console.log("Draw!");
+} else if(cpuWins > userWins) {
+    console.log("CPU Wins!");
+} else {
+    console.log("User Wins!");
+}
 
 //  5) Compare results
 
