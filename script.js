@@ -9,89 +9,61 @@ let userRounds = 0;
 let drawRounds = 0;
 let roundNumber = 1;
 
-//  Repeat process through end of Round 5
-
-while(roundNumber <= 5) {
-
-//  1) CPU generates 'Rock', 'Paper', or 'Scissors' at random
-
-function computerPlay() {
-    let x = Math.random()*100;
-    if (x <= 32) {
-        return cpuAns = "Rock";
-    } else if (x <= 66) { 
-        return cpuAns = "Paper";
-    } else if (x <= 99) {
-        return cpuAns = "Scissors";
+function playRound(userAns, cpuAns) {
+	
+    function computerPlay() {               //  1) CPU generates 'Rock', 'Paper', or 'Scissors' at random
+        let x = Math.random()*100;
+        if (x <= 32) {
+            return cpuAns = "Rock";
+        } else if (x <= 66) { 
+            return cpuAns = "Paper";
+        } else if (x <= 99) {
+            return cpuAns = "Scissors";
+        }
+    
     }
-}
 
-computerPlay();
+    computerPlay();
 
-
-
-//  2) Prompt user to enter 'Rock', 'Paper, or 'Scissors'. Make this field case insensitive.
-
-userAns = prompt("Rock, Paper, or Scissors?");
-console.log("User guessed '" + userAns + "'");
-console.log("CPU guessed '" + cpuAns + "'")
-
-//  3) Enforce case insensitivity for comparision.
-
-userAns.toLowerCase();
-cpuAns.toLowerCase();
-
-//  4) Compare cpuAns and userAns.
-
-if (userAns == null) {
-    prompt("Refresh and try again!");
-} else if (userAns === cpuAns) {
-    console.log("Draw!");
-} else if (userAns === "Rock" && cpuAns === "Scissors" || userAns === "Paper" && cpuAns === "Rock" || userAns === "Scissors" && cpuAns === "Paper") {
-    console.log("User Wins Round " + roundNumber + "!");
-    userWins++;
-} else {
-    console.log("CPU Wins Round " + roundNumber + "!");
-    cpuWins++;
-}
-
-roundNumber++;
-
-}
-
-//      if cpuAns = userAns, return 'Draw'
-
-//      else if cpuAns = 'Rock' & userAns = 'Paper', return 'User Wins'
-//      else if userAns = 'Scissors', return 'CPU Wins'
-
-//      else if cpuAns = 'Paper' & userAns = 'Scissors', return 'User Wins'
-//      else if userAns = 'Rock', return 'CPU Wins'
-
-//      else if cpuAns = 'Scissors' & userAns = 'Rock', return 'User Wins'
-//      else if userAns = 'Paper', return 'CPU Wins'
-
-//  4) Tally results
-
-
+    userAns = prompt("Rock, Paper, or Scissors?");          //  2) Prompt user to enter 'Rock', 'Paper, or 'Scissors'.
+	
+	console.log("User guessed '" + userAns + "'");
+	console.log("CPU guessed '" + cpuAns + "'");
+	
+	userAns.toLowerCase();                                  //  3) Enforce case insensitivity for comparision.
+	cpuAns.toLowerCase();
     
-    
-if(cpuWins === userWins) {
-    console.log("Draw!");
-} else if(cpuWins > userWins) {
-    console.log("CPU Wins!");
-} else {
-    console.log("User Wins!");
-}
+    if (userAns == null) {
+    		prompt("Refresh and try again!");               //  4) Compare cpuAns and userAns.
+	} else if (userAns === cpuAns) {                        //  5) Tally results
+    		console.log("Round " + roundNumber + ": Draw!");
+	} else if (userAns === "Rock" && cpuAns === "Scissors" || userAns === "Paper" && cpuAns === "Rock" || userAns === "Scissors" && cpuAns === "Paper") {
+    		console.log("Round " + roundNumber + ": User Wins!");
+    		userWins++;
+	} else {
+    		console.log("Round " + roundNumber + ": CPU Wins!");
+    		cpuWins++;
+	}
 
-//  5) Compare results
+	roundNumber++;
 
-//      if cpuWins > userWins, return 'CPU Wins'
-//      else, return 'User Wins'
-//      increment roundCount + 1
+	}
 
-//  6) Start next round unless roundCount = 5
-//      else tally total roundWins for both CPU & User
 
-//  7) Compare total roundWins and declare winner
+function game() {
 
-//  8) Would you like to play again?
+	while(roundNumber <= 5) {                               //  6) Repeat through end of Round 5
+		playRound();
+		}
+
+	if(cpuWins === userWins) {                              //  7) Compare total wins and declare winner
+    		console.log("Final Result: Draw!");
+	} else if(cpuWins > userWins) {
+    		console.log("Final Result: CPU Wins!");
+	} else {
+    		console.log("Final Result: User Wins!");
+	}
+
+	}
+
+game();
