@@ -42,14 +42,13 @@ if (userAns == null) {
     prompt("Refresh and try again!");
 } else if (userAns === cpuAns) {
     console.log("Draw!");
-} else if (userAns === "Rock" || cpuAns === "Scissors") { // || userAns === "Paper" && cpuAns === "Rock" || userAns === "Scissors" && cpuAns === "Paper") {
-    console.log("User Wins!");
+} else if (userAns === "Rock" && cpuAns === "Scissors" || userAns === "Paper" && cpuAns === "Rock" || userAns === "Scissors" && cpuAns === "Paper") {
+    console.log("User Wins Round " + roundNumber + "!");
+    userWins++;
 } else {
-    console.log("CPU Wins!");
+    console.log("CPU Wins Round " + roundNumber + "!");
+    cpuWins++;
 }
-
-console.log(userAns);
-console.log(cpuAns);
 
 roundNumber++;
 
@@ -68,7 +67,10 @@ roundNumber++;
 
 //  4) Tally results
 
-if(cpuWins == userWins) {
+
+    
+    
+if(cpuWins === userWins) {
     console.log("Draw!");
 } else if(cpuWins > userWins) {
     console.log("CPU Wins!");
