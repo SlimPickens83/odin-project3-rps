@@ -36,7 +36,12 @@ userAns = prompt("Rock, Paper, or Scissors?");
 console.log("User guessed '" + userAns + "'");
 console.log("CPU guessed '" + cpuAns + "'")
 
-//  3) Compare cpuAns and userAns.
+//  3) Enforce case insensitivity for comparision.
+
+userAns.toLowerCase();
+cpuAns.toLowerCase();
+
+//  4) Compare cpuAns and userAns.
 
 if (userAns == null) {
     prompt("Refresh and try again!");
