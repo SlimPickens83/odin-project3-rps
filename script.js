@@ -1,136 +1,79 @@
-
-//  1) Declare variables such as 'cpuAns', 'userAns', and any others as needed.
-
 let cpuAns;
 let userAns;
 let resetDecision = "y";
 let cpuWins = 0;
 let userWins = 0;
-let cpuRounds = 0;
-let userRounds = 0;
+let drawCount = 0;
 let roundNumber = 1;
 
+const buttons = document.querySelectorAll('button');
 
-function playRound(userAns, cpuAns) {
-	
-	console.log("Round " + roundNumber);
-	alert("Round " + roundNumber);
+const scoreboard = document.getElementById("Scoreboard");
+const round = document.getElementById("Round");
+const user = document.getElementById("User");
+const cpu = document.getElementById("CPU");
+const userGuess = document.getElementById("userGuess");
+const cpuGuess = document.getElementById("cpuGuess");
+const winner = document.getElementById("Winner");
+const draw = document.getElementById("Draw");
 
-//  2) CPU generates 'Rock', 'Paper', or 'Scissors' at random
+const resetButton = document.createElement('button');
 
-    function computerPlay() {
-        let x = Math.random()*100;
-        if (x <= 32) {
-            return cpuAns = "Rock";
-        } else if (x <= 66) { 
-            return cpuAns = "Paper";
-        } else if (x <= 99) {
-            return cpuAns = "Scissors";
-        }
-    
-    }
 
-    computerPlay();
+buttons.forEach((button) => {
+	button.addEventListener('click', () => 
+	{
+		userAns = button.id;
 
-//  3) Prompt user to enter 'Rock', 'Paper, or 'Scissors'.
+		if (userWins !== 5 && cpuWins !== 5) {
+			playRound();			
+		}
+	});
+});
 
-    userAns = prompt("Rock, Paper, or Scissors?");
-	
-	console.log("User guessed '" + userAns + "'");
-	console.log("CPU guessed '" + cpuAns + "'");
+function playRound() {	
+	round.textContent = `Round: ${roundNumber}`;
 
-	alert("User guessed '" + userAns + "'");
-	alert("CPU guessed '" + cpuAns + "'");
+	computerPlay();
 
-//  4) Enforce case insensitivity for comparision.
-
-	userAns = userAns.toLowerCase();
-	cpuAns = cpuAns.toLowerCase();
-
-//  4) Compare cpuAns and userAns. Declare win, lose, or draw. Tally results. Move to next round.
+	userGuess.textContent = `User guessed: ${userAns}`;
+	cpuGuess.textContent = `CPU guessed: ${cpuAns}`;
 
 	if (userAns === cpuAns) {
-    		console.log("Round " + roundNumber + ": Draw!");
-			alert("Round " + roundNumber + ": Draw!     CPU: " + cpuWins + " :: User: " + userWins);
-	} else if (userAns === "rock" && cpuAns === "scissors" || userAns === "paper" && cpuAns === "rock" || userAns === "scissors" && cpuAns === "paper") {
-			userWins++;
-    		console.log("Round " + roundNumber + ": User Wins!");
-			alert("Round " + roundNumber + ": User Wins!     CPU: " + cpuWins + " :: User: " + userWins);
-
-	} else if (cpuAns === "rock" && userAns === "scissors" || cpuAns === "paper" && userAns === "rock" || cpuAns === "scissors" && userAns === "paper")	{
-			cpuWins++;
-    		console.log("Round " + roundNumber + ": CPU Wins!");
-			alert("Round " + roundNumber + ": CPU Wins!     CPU: " + cpuWins + " :: User: " + userWins);    		
+		drawCount++;
+	} else if ((userAns === "Rock" && cpuAns === "Scissors") || (userAns === "Paper" && cpuAns === "Rock") || (userAns === "Scissors" && cpuAns === "Paper")) {
+		userWins++;
 	} else {
-		alert("User entry error.");
-		roundNumber = 6;
+		cpuWins++;
 	}
 
 	roundNumber++;
 
-}
+	user.textContent = `User: ${userWins}`;
+	cpu.textContent = `CPU: ${cpuWins}`;
+	draw.textContent = `Draws: ${drawCount}`;
 
-//  5) Compare total wins and declare winner.
-
-function declareWinner() {
-
-	if (cpuWins === userWins) {
-		console.log("Final Result: Draw!");
-	 alert("Final Result: Draw!");
-	} else if (cpuWins > userWins) {
-	 console.log("Final Result: CPU Wins!");
-	 alert("Final Result: CPU Wins!");
-	} else {
-	 console.log("Final Result: User Wins!");
-	 alert("Final Result: User Wins!");
-	}
-
-}
-
-// 6) Repeat through end of round 5.
-
-function game() {
-
-	while (roundNumber <= 5) {
-		playRound();
-		}
-
-	if (roundNumber = 6) {
+	if (userWins === 5 || cpuWins === 5) {
 		declareWinner();
 	}
 
-	if (roundNumber > 6) {
-		alert("Refresh and try again.")
+}
+
+function computerPlay() {
+	let x = Math.random()*100;
+	if (x <= 32) {
+		cpuAns = "Rock";
+	} else if (x <= 66) { 
+		cpuAns = "Paper";
+	} else if (x <= 99) {
+		cpuAns = "Scissors";
 	}
+}    
 
-}
-
-// 7) Reset values if user wants to play again.
-
-function reset() {
-	
-	cpuWins = 0;
-	userWins = 0;
-	cpuRounds = 0;
-	userRounds = 0;
-	roundNumber = 1;
-
-}
-
-// 8) Concluding while loop runs above function and represents one complete iteration of the game.
-
-while(resetDecision === "y") {
-
-	game();
-
-	resetDecision = prompt("Would you like to play again?  Y/N");
-
-	let resetDecisionL = resetDecision.toLowerCase();
-
-	if (resetDecisionL === "y") {
-		reset();
+function declareWinner() {
+	if (cpuWins === 5) {
+		winner.textContent = "Winner: CPU";
 	} else {
-		alert("Come back soon!");
+		winner.textContent = "Winner: User";
 	}
-
 }
