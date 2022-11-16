@@ -1,4 +1,4 @@
-# odin-project3-rps
+# https://slimpickens83.github.io/odin-project3-rps/
 
 Don’t forget to commit early & often! You can reference the Commit Message lesson here!
 
@@ -35,5 +35,3 @@ Use prompt() to get input from the user. Read the docs here if you need to.
 Feel free to re-work your previous functions if you need to. Specifically, you might want to change the return value to something more useful.
 
 Feel free to create more “helper” functions if you think it would be useful.
-
-Viewable at: https://slimpickens83.github.io/odin-project3-rps/
